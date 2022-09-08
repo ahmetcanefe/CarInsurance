@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+>
+<div th:replace="car/header :: header"></div>
+
+<body>
+
+<div th:replace="car/header :: navbar"></div>
+<br> <br> <br>
+
+<div class="container">
+    <div class="row">        
+    <h3>Müşteri Bilgileri:</h3> <br>
+       <table class="table table-striped table-hover table-border">
+         <thead class="table-dark">
+              <th>#</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Mobile Phone</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>BirthDate</th>
+         </thead>
+         
+         <tbody>
+              <tr>
+                   <td>1</td>
+                   <td th:text="${customer.name}"></td>
+                   <td th:text="${customer.surname}"></td>
+                   <td th:text="${customer.mobilePhone}"></td>
+                   <td th:text="${customer.email}"></td>
+                   <td th:text="${customer.city.name}"></td>    
+                   <td th:text="${customer.birthDate}"></td>               
+              </tr>
+         </tbody>
+     </table>
+     <br> <br>
+     
+      <h3>Müşteri'nin Araç Bilgileri</h3>
+         <table class="table table-striped table-hover table-border">
+         <thead class="table-dark">
+              <th>#</th>
+              <th>LicensePlate</th>
+              <th>Model</th>
+              <th>Yıl</th>
+              <th>Km</th>
+              <th>Renk</th>
+              <td>Sigorta Kayıtları</td>
+              <td>Kaza Kayıtları</td>
+         </thead>
+         
+         <tbody>
+         <div th:each="car: ${customer.cars}">
+              <tr>
+                   <td th:text="${car.id}"></td>
+                   <td th:text="${car.licensePlate}"></td>
+                   <td th:text="${car.model.name}"></td>
+                   <td th:text="${car.manufacturingYear}"></td>
+                   <td th:text="${car.mileage}"></td>
+                   <td th:text="${car.color}"></td>           
+                   <td>
+                       <a th:href="@{/{carId}/policies/get(carId=${car.id})}" class="btn btn-primary"> Sigorta Kayıtları</a>
+                   </td>  
+                   <td>
+                       <a th:href="@{/{carId}/carAccidents/get(carId=${car.id})}" class="btn btn-primary"> Kaza Kayıtları</a>
+                   </td>    
+              </tr>
+         </div>
+         </tbody>
+     </table>    
+     
+     
+      
+</div>
+</div>
+
+</body>
+</html>

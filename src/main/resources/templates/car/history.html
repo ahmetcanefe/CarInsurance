@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+>
+
+   
+
+<div th:replace="car/header :: header"></div>
+<body>
+<div th:replace="car/header :: navbar"></div>
+<br />
+
+     <div class="container">
+    
+     
+     <div class="row">
+         <div class="col-md-3">
+              <div th:replace="header :: header"></div>
+         </div>
+     
+          <div class="col-md-9">
+            
+               
+               <table class="table table-striped table-hover table-border">
+         <thead class="table-dark">
+              <th>#</th>
+              <th>License Plate</th>
+              <th>Car Accident</th>
+              <th>Car Accident Detail</th>
+              <th>status<th>
+         </thead>
+         
+         <tbody>
+              <tr th:each = "carAccident, carAccidentStat : ${carAccidents}">
+                   <td th:text="${carAccidentStat.count}"></td>
+                   <td th:text="${carAccident.car.licensePlate}"></td>
+                   <td th:text="${carAccident.accidentName}"></td>
+                   <td th:text="${carAccident.accidentDetail}"></td>
+                   <td>pending..</td>
+                   
+              </tr>
+         </tbody>
+     </table>
+    
+          </div>
+     </div>
+      </div>
+</body>
+</html>

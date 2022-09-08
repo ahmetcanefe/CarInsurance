@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+>
+<div th:replace="car/header :: header"></div>
+
+<body>
+
+<div th:replace="admin/navbar :: navbar"></div>
+<br />
+
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center"> Edit Post</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/admin/customers/update/{customerId}(customerId=${customer.id})}" th:object="${customer}">
+                   <div class="mb-3">
+                   <input type="hidden" th:field="*{nationalIdentity}">
+                   <input type="hidden" th:field="*{email}">
+                   <input type="hidden" th:field="*{password}">
+                        <label class="form-label"> name </label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                placeholder="Enter name"
+                                name="name"
+                                th:field="*{name}"
+                        />
+                        <p th:if="${#fields.hasErrors('name')}" class="text-danger"
+                        th:errors="*{name}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">surname</label>
+                        <input
+                                class="form-control"
+                                id="model"
+                                placeholder="Enter surname"
+                                name="surname"
+                                th:field="*{surname}"
+                        >
+                        <p th:if="${#fields.hasErrors('surname')}" class="text-danger"
+                           th:errors="*{surname}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">mobilePhone</label>
+                        <input
+                                class="form-control"
+                                id="mobilePhone"
+                                placeholder="Enter mobilePhone"
+                                name="mobilePhone"
+                                th:field="*{mobilePhone}"
+                        >
+                        <p th:if="${#fields.hasErrors('mobilePhone')}" class="text-danger"
+                           th:errors="*{mobilePhone}"></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                                <label class="form-label"> City </label>
+                                <select class="form-control" name="cityId">
+                                   <option value="">Select..</option>
+                                   <option th:each="city : ${cities}" th:value="${city.id}" th:utext="${city.name}"/>
+                                </select>                       
+                                <p th:if="${#fields.hasErrors('city')}" class="text-danger"
+                                th:errors="*{city}"></p>
+                    </div>
+                        
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

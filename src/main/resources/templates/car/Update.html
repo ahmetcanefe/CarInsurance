@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+>
+<div th:replace="car/header :: header"></div>
+
+<body>
+
+<div th:replace="car/header :: navbar"></div>
+<br />
+
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center"> Edit Post</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/cars/update/{carId}(carId=${car.id})}" th:object="${car}">
+                   <div class="mb-3">
+                        <label class="form-label"> licensePlate </label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="licensePlate"
+                                placeholder="Enter licensePlate"
+                                name="licensePlate"
+                                th:field="*{licensePlate}"
+                        />
+                        <p th:if="${#fields.hasErrors('licensePlate')}" class="text-danger"
+                        th:errors="*{licensePlate}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"> Model </label>
+                       
+                        <select class="form-control" name="modelId" >
+                                <option th:value="${car.model.id}" th:utext="${car.model.name}">Select..</option>
+                                <option th:each="model : ${models}" th:value="${model.id}" th:utext="${model.name}"/>
+                        </select>                       
+                        <p th:if="${#fields.hasErrors('model')}" class="text-danger"
+                           th:errors="*{model}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">manufacturingYear</label>
+                        <input
+                                class="form-control"
+                                id="manufacturingYear"
+                                placeholder="Enter manufacturingYear"
+                                name="manufacturingYear"
+                                th:field="*{manufacturingYear}"
+                        >
+                        <p th:if="${#fields.hasErrors('manufacturingYear')}" class="text-danger"
+                           th:errors="*{manufacturingYear}"></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">mileage</label>
+                        <input
+                                class="form-control"
+                                id="mileage"
+                                placeholder="Enter mileage"
+                                name="mileage"
+                                th:field="*{mileage}"
+                        >
+                        <p th:if="${#fields.hasErrors('mileage')}" class="text-danger"
+                           th:errors="*{mileage}"></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">color</label>
+                        <input
+                                class="form-control"
+                                id="color"
+                                placeholder="Enter color"
+                                name="color"
+                                th:field="*{color}"
+                        >
+                        <p th:if="${#fields.hasErrors('color')}" class="text-danger"
+                           th:errors="*{color}"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<br/> <br/> <br/> <br/> <br/>
+<div th:replace("admin/footer :: footer")></div>
+
+</body>
+</html>

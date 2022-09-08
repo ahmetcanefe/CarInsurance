@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+     
+>
+
+   
+
+<div th:replace="car/header :: header"></div>
+<body>
+<div th:replace="admin/navbar :: navbar"></div>
+<br />
+
+     <div class="container">
+    
+     
+     <div class="row">
+         <div class="col-md-3">
+              <div th:replace="adminHeader :: header"></div>
+         </div>
+              
+     <div class="col-md-9">
+     
+     <div class="card-body">
+              <div class="form-group">
+              
+                  <form class="form-group" th:action="@{/admin/cars/getAll/search/{currentPage}(currentPage=${currentPage})}">
+                      <div class="input-group">  
+                           <input class="form-control me-2" type="search" name="query" placeholder="Search By License Plate" aria-label="Search">
+                           <button class="btn btn-outline-success" type="submit">Search</button>
+                      </div>
+                  </form>
+                  
+             </div>
+     </div>
+              
+               
+               <table class="table table-striped table-hover table-border">
+         <thead class="table-dark">
+              <th>licensePlate</th>
+              <th>nationalIdentity</th>
+              <th>model</th>
+              <th>manufacturingYear</th>
+              <th>mileage</th>
+              <th>color</th>
+              <th>Actions</th>
+         </thead>
+         
+         <tbody>
+              <tr th:each = "car : ${cars}">
+                   <td th:text="${car.licensePlate}"></td>
+                    <td th:text="${car.customer.nationalIdentity}"></td>
+                   <td th:text="${car.model.name}"></td>
+                   <td th:text="${car.manufacturingYear}"></td>
+                   <td th:text="${car.mileage}"></td>
+                   <td th:text="${car.color}"></td>
+                   <td>
+                       <a th:href="@{/cars/update/{carId}(carId=${car.id})}" class="btn btn-primary"> Edit</a>
+                       <a th:href="@{/cars/delete/{carId}(carId=${car.id})}" class="btn btn-danger"> Delete</a>
+                       <a th:href="@{/admin/cars/getById/{carId}(carId=${car.id})}" class="btn btn-info"> View</a>
+                   </td>
+                   
+              </tr>
+         </tbody>
+     </table>
+     
+     <footer style="font-size: large" class="panel-footer">
+        <nav aria-label="Page navigation example">
+        Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
+    
+    <ul class="pagination">
+        <li class="page-item">
+            <a  class="page-link" th:if="${totalPages != 0}" th:href="@{/admin/cars/getAll/{currentPage}(currentPage=${1})}">First</a>
+        </li>
+
+        <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+              <a class="page-link" th:if="${i != 0}" th:href="@{/admin/cars/getAll/{currentPage}(currentPage=${i})}">[[${i}]]</a>       
+        </li>
+
+        <li class="page-item">
+            <a class="page-link" th:if="${totalPages != 0}" th:href="@{/admin/cars/getAll/{currentPage}(currentPage=${totalPages})}">Last</a>
+        </li>
+    </ul>
+</nav>    
+</footer>
+
+</div>
+     </div>
+      </div>
+</body>
+</html>

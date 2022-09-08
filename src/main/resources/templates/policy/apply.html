@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<div th:replace="car/header :: header"></div>
+
+<body>
+<div th:replace="car/header :: navbar"></div>
+<br /><br />
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center"> Apply Policy</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/policies/apply}" th:object="${applyPolicyDto}">
+                    <div class="mb-3">
+                        <input type="hidden" th:field="*{policyId}">
+                        <label class="form-label"> License Plate </label>
+                         <input
+                                class="form-control"
+                                id="licensePlate"
+                                placeholder="Enter licensePlate"
+                                name="licensePlate"
+                                th:field="*{licensePlate}" 
+                                
+                        >
+                        <p th:if="${#fields.hasErrors('licensePlate')}" class="text-danger"
+                        th:errors="*{licensePlate}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"> National Identity </label>
+                        <input
+                                class="form-control"
+                                id="nationalIdentity"
+                                placeholder="Enter nationalIdentity"
+                                name="nationalIdentity"
+                                th:field="*{nationalIdentity}" 
+                                readonly
+                        >
+                        <p th:if="${#fields.hasErrors('nationalIdentity')}" class="text-danger"
+                           th:errors="*{nationalIdentity}"></p>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                                 <label class="form-label"> Start Date </label>
+                                 <input class="form-control" id="startDate" name="startDate" placeholder="Enter startDate" type="date" th:field="*{startDate}">
+                                   <p th:if="${#fields.hasErrors('startDate')}" class="text-danger" th:errors="*{startDate}"></p>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                                 <label class="form-label"> End Date </label>
+                                 <input class="form-control" id="endDate" name="endDate" placeholder="Enter endDate" type="date" th:field="*{endDate}">
+                                   <p th:if="${#fields.hasErrors('endDate')}" class="text-danger" th:errors="*{endDate}"></p>
+                    </div>
+
+                   
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

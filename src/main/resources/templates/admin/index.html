@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+>
+
+   
+
+<div th:replace="car/header :: header"></div>
+<body>
+<div th:replace="admin/navbar :: navbar"></div>
+<br />
+
+     <div class="container">
+    
+     
+     <div class="row">
+         <div class="col-md-3">
+              <div th:replace="adminHeader :: header"></div>
+         </div>
+     
+          <div class="col-md-9">
+               <table class="table table-striped table-hover table-border">
+         <thead class="table-dark">
+              <th>#</th>
+              <th>name</th>
+              <th>details</th>
+              <th>Min Price</th>
+              <th>Actions</th>
+         </thead>
+         
+         <tbody>
+              <tr th:each = "policy, policyStat : ${policies}">
+                   <td th:text="${policyStat.count}"></td>
+                   <td th:text="${policy.name}"></td>
+                   <td th:text="${policy.detail}"></td>
+                   <td th:text="${policy.minPrice}">
+                   <td>
+                       <a th:href="@{/admin/policies/update/{policyId}(policyId=${policy.id})}" class="btn btn-primary"> Edit</a>
+                       <a th:href="@{/admin/policies/delete/{policyId}(policyId=${policy.id})}" class="btn btn-danger"> Delete</a>
+                       <a th:href="@{/admin/policies/getById/{policyId}/{pageNumber}(policyId=${policy.id}, pageNumber=${1})}" class="btn btn-info"> View</a>
+                   </td>
+                   
+              </tr>
+         </tbody>
+     </table>
+     
+     <a th:href="@{/admin/policies/add}" class="btn btn-primary">new Policy</a>
+          </div>
+     </div>
+      </div>
+</body>
+</html>

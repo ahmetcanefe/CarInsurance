@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<div th:replace="car/header :: header"></div>
+
+<body>
+<div th:replace="car/header :: navbar"></div>
+<br /><br />
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center"> Create Car</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/cars/add}" th:object="${car}">
+                    <div class="mb-3">
+                        <label class="form-label"> License Plate </label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="licensePlate"
+                                placeholder="Enter License Plate"
+                                name="licensePlate"
+                                th:field="*{licensePlate}"
+                        />
+                        <p th:if="${#fields.hasErrors('licensePlate')}" class="text-danger"
+                        th:errors="*{licensePlate}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"> Model </label>
+                        <select class="form-control" name="modelId">
+                                <option value="">Select..</option>
+                                <option th:each="model : ${models}" th:value="${model.id}" th:utext="${model.name}"/>
+                        </select>                       
+                        <p th:if="${#fields.hasErrors('model')}" class="text-danger"
+                           th:errors="*{model}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label"> Manufacturing Year </label>
+                        <input
+                                class="form-control"
+                                id="manufacturingYear"
+                                placeholder="Enter Manufacturing Year"
+                                name="manufacturingYear"
+                                th:field="*{manufacturingYear}"
+                        >
+                        <p th:if="${#fields.hasErrors('manufacturingYear')}" class="text-danger"
+                           th:errors="*{manufacturingYear}"></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label"> Mileage </label>
+                        <input
+                                class="form-control"
+                                id="mileage"
+                                placeholder="Enter Mileage"
+                                name="mileage"
+                                th:field="*{mileage}"
+                        >
+                        <p th:if="${#fields.hasErrors('mileage')}" class="text-danger"
+                           th:errors="*{mileage}"></p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label"> Color </label>
+                        <input
+                                class="form-control"
+                                id="color"
+                                placeholder="Enter Color"
+                                name="color"
+                                th:field="*{color}"
+                        >
+                        <p th:if="${#fields.hasErrors('color')}" class="text-danger"
+                           th:errors="*{color}"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

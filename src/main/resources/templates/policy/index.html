@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns:th="http://www.thymeleaf.org"
+>
+
+   
+
+<div th:replace="car/header :: header"></div>
+<body>
+<div th:replace="car/header :: navbar"></div>
+<br />
+
+     <div class="container">
+        
+
+     <div>
+      <div class="row">
+         <div class="col-md-3">
+              <div th:replace="header :: header"></div>
+         </div>
+         
+          <div class="col-md-9">
+              
+                   
+                <table class="table table-striped table-hover table-border">
+         <thead class="table-dark">
+              <th>#</th>
+              <th>name</th>
+              <th>detail</th>
+              <th>Actions</th>
+         </thead>
+         
+         <tbody>
+              <tr th:each = "policy: ${policies}">
+                   <td th:text="${policy.id}"></td>
+                   <td th:text="${policy.name}"></td>
+                   <td th:text="${policy.detail}"></td>
+                   <td>
+                       <a th:href="@{/policies/apply/{policyId}(policyId=${policy.id})}" class="btn btn-danger"> Apply</a>
+                   </td>
+              </tr>
+         </tbody>
+     </table>
+     </div>
+          </div> 
+          
+          </div>
+    
+</body>
+</html>

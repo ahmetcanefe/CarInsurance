@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns:th="http://www.thymeleaf.org"
+>
+
+<div th:replace="car/header :: header"></div>
+
+<body>
+<div th:replace="car/header :: navbar"></div>
+<br /><br />
+
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center"> Create Car</h2>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/{carId}/carAccidents(carId=${carAccident.carId})}" th:object="${carAccident}">
+                    <div class="mb-3">
+                        <label class="form-label"> accidentName </label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="accidentName"
+                                placeholder="Enter accidentName"
+                                name="accidentName"
+                                th:field="*{accidentName}"
+                        />
+                        <p th:if="${#fields.hasErrors('accidentName')}" class="text-danger"
+                        th:errors="*{accidentName}"></p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">accidentDetail</label>
+                        <input
+                                class="form-control"
+                                id="accidentDetail"
+                                placeholder="Enter accidentDetail"
+                                name="accidentDetail"
+                                th:field="*{accidentDetail}"
+                        >
+                        <p th:if="${#fields.hasErrors('accidentDetail')}" class="text-danger"
+                           th:errors="*{accidentDetail}"></p>
+                    </div>
+
+                    
+                    
+                   
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
